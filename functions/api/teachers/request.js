@@ -9,7 +9,7 @@
 
 import { classifyEmail, randomToken, json, sendMagicLink } from '../../_shared.js';
 
-export async function onRequestPost({ request, env }) {
+async function _onRequestPost({ request, env }) {
   let body;
   try { body = await request.json(); }
   catch { return json({ ok: false, error: 'invalid-json' }, 400); }
@@ -71,6 +71,21 @@ export async function onRequestPost({ request, env }) {
     status: 'pending',
     message: 'Check your school email for a verification link. It expires in 24 hours.',
   });
+}
+
+// Wrap the handler so any uncaught exception surfaces in the JSON
+// response instead of bubbling up as a 502. Easier to debug live.
+export async function onRequestPost(ctx) {
+  try {
+    return await _onRequestPost(ctx);
+  } catch (e) {
+    return json({
+      ok: false,
+      error: 'unhandled-exception',
+      message: String(e && e.message || e),
+      stack: String(e && e.stack || '').slice(0, 500),
+    }, 500);
+  }
 }
 
 // Reject other methods explicitly
