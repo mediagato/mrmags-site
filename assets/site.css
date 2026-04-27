@@ -111,9 +111,13 @@ a:hover { color: var(--accent); }
    wide where the cartoon image isn't framing the layout the same way. */
 
 @media (min-width: 900px) {
+  /* Brand lives in the photo itself — drop the desktop word-mark in the topbar. */
+  .hero[data-photo="true"] .logo { display: none; }
+
   .hero[data-photo="true"] .topbar {
     align-items: flex-start;
     padding-top: 36px;
+    justify-content: flex-end;
   }
 
   .hero[data-photo="true"] .nav {
