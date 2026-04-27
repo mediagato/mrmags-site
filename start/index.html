@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mr. Mags — How to use it</title>
+<meta name="description" content="A one-page guide to talking with Claude through Mr. Mags. Six phrases is all you need." />
+<link rel="icon" href="/favicon.ico" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="/assets/site.css" />
+<link rel="stylesheet" href="/assets/start.css" />
+</head>
+<body class="start-body">
+
+<header class="start-topbar">
+  <a class="logo logo-dark" href="/" aria-label="Mr. Mags home">Mr. Mags</a>
+  <nav class="nav nav-dark" aria-label="Primary">
+    <a href="/">HOME</a>
+    <a href="/#about">ABOUT</a>
+    <a href="/#download">DOWNLOAD</a>
+    <a href="mailto:hello@mrmags.org">CONTACT</a>
+  </nav>
+</header>
+
+<main class="start-main">
+  <div class="start-container">
+
+    <span class="kicker">Getting started</span>
+    <h1>Six phrases is all you need.</h1>
+    <p class="lede">
+      You don't have to learn anything new. Talk to Claude the way you always have. Mr. Mags listens
+      in, remembers what matters, and brings it back when you ask. Below are the phrasings Claude
+      reliably understands — keep this open the first few times if it helps. After a week, you won't
+      need it.
+    </p>
+
+    <section class="phrase-block">
+      <h2>To save something</h2>
+      <p class="phrase">"Remember that I teach biology."</p>
+      <p class="phrase">"Remember that my third-period class has 28 students."</p>
+      <p class="phrase">"Save this for later: <em>[paragraph]</em>."</p>
+      <p class="meta">Anything starting with "remember that" or "save" lands as a memory. Pick filenames in your head as you go — Claude will reuse them.</p>
+    </section>
+
+    <section class="phrase-block">
+      <h2>To check what's stored</h2>
+      <p class="phrase">"What do you know about me?"</p>
+      <p class="phrase">"What do you know about my classes?"</p>
+      <p class="phrase">"Show me everything you remember."</p>
+      <p class="meta">Claude will list filenames and pull up content as needed. The first one is the safest "is this thing working?" check.</p>
+    </section>
+
+    <section class="phrase-block">
+      <h2>To update something</h2>
+      <p class="phrase">"Update what you know about my schedule — third period is now AP Biology."</p>
+      <p class="phrase">"Forget what I said about Sam — he transferred out."</p>
+      <p class="meta">"Update" overwrites. "Forget" deletes. Both are clean.</p>
+    </section>
+
+    <section class="phrase-block">
+      <h2>For your professional context (small, recurring stuff)</h2>
+      <p class="phrase">"I'm working on lesson plans for next week."</p>
+      <p class="phrase">"This week's unit is cell biology."</p>
+      <p class="meta">Short context updates — Claude saves them as state, ready for any chat to reference.</p>
+    </section>
+
+    <section class="phrase-block">
+      <h2>If you're a teacher (one-time on first use)</h2>
+      <p class="phrase">"Set me up as a teacher."</p>
+      <p class="phrase">"Load the teacher pack."</p>
+      <p class="meta">Claude pulls down 8 starter templates — lesson plan, rubric, parent email, IEP framing, classroom management, more. It's idempotent: running it again won't overwrite anything you've changed.</p>
+    </section>
+
+    <hr class="rule" />
+
+    <section class="troubleshoot">
+      <h2>If something feels off</h2>
+      <dl>
+        <dt>Claude doesn't seem to remember anything.</dt>
+        <dd>Quit Claude Desktop completely and reopen it. Mr. Mags only loads when Claude starts up.</dd>
+
+        <dt>Claude says "Mr. Mags isn't running."</dt>
+        <dd>Open Mr. Mags from your Applications folder. It lives in your menu bar (Mac) or system tray (Windows). The icon needs to be there.</dd>
+
+        <dt>I uninstalled Claude Desktop / moved Mr. Mags / something weird.</dt>
+        <dd>Reopen Mr. Mags. It self-heals — it'll re-write Claude Desktop's connection on every launch.</dd>
+
+        <dt>Where does my data live?</dt>
+        <dd>On your machine. Mac: <code>~/Library/Application Support/Mr. Mags/</code>. Windows: <code>%APPDATA%\Mr. Mags\</code>. We don't have a copy. Period.</dd>
+      </dl>
+    </section>
+
+    <p class="signoff">
+      Stuck? Email <a href="mailto:hello@mrmags.org">hello@mrmags.org</a>. Real human reads it.
+    </p>
+
+  </div>
+</main>
+
+</body>
+</html>
