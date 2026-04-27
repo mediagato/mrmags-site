@@ -240,6 +240,28 @@ h2 {
 
 .aside.small { font-size: 13px; }
 
+.cta-row {
+  margin-top: 32px !important;
+}
+
+.cta-link {
+  display: inline-block;
+  padding: 14px 28px;
+  border: 1px solid var(--ink);
+  color: var(--ink);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 500;
+  border-radius: 3px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.cta-link:hover {
+  background: var(--ink);
+  color: #fff;
+}
+
 /* ── Download cards ─────────────────────────────────────────────────── */
 
 .downloads {

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mr. Mags — Verified</title>
+<meta name="description" content="Your forever-free Mr. Mags teacher license." />
+<link rel="icon" href="/favicon.ico" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="/assets/site.css" />
+<link rel="stylesheet" href="/assets/start.css" />
+</head>
+<body class="start-body">
+
+<header class="start-topbar">
+  <a class="logo logo-dark" href="/" aria-label="Mr. Mags home">Mr. Mags</a>
+  <nav class="nav nav-dark" aria-label="Primary">
+    <a href="/">HOME</a>
+    <a href="/start">CHEAT SHEET</a>
+    <a href="/#download">DOWNLOAD</a>
+    <a href="mailto:hello@mrmags.org">CONTACT</a>
+  </nav>
+</header>
+
+<main class="start-main">
+  <div class="start-container">
+
+    <span class="kicker">Verified</span>
+    <h1 id="hdr">You're locked in.</h1>
+    <p class="lede" id="lede">
+      Welcome to the teachers list. The license below is yours forever — no expiry, no upgrade
+      prompts, no fine print. When paid features ship later, you keep them all free.
+    </p>
+
+    <section class="license-block" id="license-section">
+      <label>Your forever-free license</label>
+      <div class="license-row">
+        <code id="license-code"></code>
+        <button id="copy-btn" type="button">Copy</button>
+      </div>
+      <p class="hint">
+        Today there's nothing to enter this into — Mr. Mags v0.1 is free for everyone. We're saving your
+        license against your email so the moment paid features ship later, your account is already flagged
+        <em>teacher_free_forever</em>. Hold onto this email, or just email yourself a copy.
+      </p>
+    </section>
+
+    <hr class="rule" />
+
+    <section class="phrase-block">
+      <h2>What's next</h2>
+      <p>
+        If you haven't installed Mr. Mags yet, head to <a href="/#download">the downloads</a> and grab the
+        Mac or Windows installer. The install is unsigned for v0 (we right-click → open the first time),
+        and the cheat sheet at <a href="/start">mrmags.org/start</a> shows the six phrases that get the most out of it.
+      </p>
+      <p>
+        Questions? Real human reads <a href="mailto:hello@mrmags.org">hello@mrmags.org</a>.
+      </p>
+    </section>
+
+  </div>
+</main>
+
+<style>
+.license-block {
+  margin: 32px 0;
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 28px;
+}
+
+.license-block label {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+
+.license-row {
+  display: flex;
+  gap: 12px;
+  align-items: stretch;
+}
+
+.license-row code {
+  flex: 1;
+  padding: 12px 14px;
+  background: var(--paper-alt);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  font-family: "SF Mono", Menlo, monospace;
+  font-size: 12px;
+  word-break: break-all;
+  color: var(--ink);
+  user-select: all;
+}
+
+.license-row button {
+  padding: 0 24px;
+  background: var(--ink);
+  color: #fff;
+  border: 0;
+  border-radius: 4px;
+  font: inherit;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.license-row button:hover { background: var(--accent); }
+
+@media (max-width: 600px) {
+  .license-row { flex-direction: column; }
+  .license-row button { padding: 12px; }
+}
+</style>
+
+<script>
+const params = new URLSearchParams(location.search);
+const license = params.get('license');
+const email = params.get('email');
+const error = params.get('error');
+const already = params.get('already');
+
+const hdr = document.getElementById('hdr');
+const lede = document.getElementById('lede');
+const section = document.getElementById('license-section');
+const code = document.getElementById('license-code');
+
+if (error) {
+  hdr.textContent = 'Hmm — something went wrong.';
+  let msg = 'Try the verification link again, or request a fresh one at /teachers.';
+  if (error === 'expired') msg = 'That link expired (24-hour window). Request a fresh one at /teachers.';
+  if (error === 'invalid-or-used') msg = 'That link was already used or never existed. Request a new one at /teachers.';
+  if (error === 'missing-token') msg = "There's no verification token in the URL. Did you click the email link?";
+  lede.textContent = msg;
+  section.hidden = true;
+} else if (already && email) {
+  hdr.textContent = "You're already on the list.";
+  lede.textContent = `${email} is already verified. Check your email for the original license, or email hello@mrmags.org and I'll resend it.`;
+  section.hidden = true;
+} else if (license) {
+  code.textContent = license;
+  if (email) {
+    lede.textContent = `Welcome to the teachers list, ${email}. The license below is yours forever — no expiry, no upgrade prompts. When paid features ship later, you keep them all free.`;
+  }
+} else {
+  hdr.textContent = 'Almost there.';
+  lede.textContent = 'Looks like you got here without a verification link. Head to /teachers and enter your school email to start.';
+  section.hidden = true;
+}
+
+const btn = document.getElementById('copy-btn');
+btn?.addEventListener('click', async () => {
+  try {
+    await navigator.clipboard.writeText(code.textContent);
+    btn.textContent = 'Copied ✓';
+    setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+  } catch {
+    btn.textContent = 'Press ⌘+C';
+  }
+});
+</script>
+
+</body>
+</html>

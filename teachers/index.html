@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mr. Mags — Free for Teachers, Forever.</title>
+<meta name="description" content="Verify your school email and your forever-free Mr. Mags license is yours. No expiry, no fine print." />
+<link rel="icon" href="/favicon.ico" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="/assets/site.css" />
+<link rel="stylesheet" href="/assets/start.css" />
+</head>
+<body class="start-body">
+
+<header class="start-topbar">
+  <a class="logo logo-dark" href="/" aria-label="Mr. Mags home">Mr. Mags</a>
+  <nav class="nav nav-dark" aria-label="Primary">
+    <a href="/">HOME</a>
+    <a href="/start">CHEAT SHEET</a>
+    <a href="/#download">DOWNLOAD</a>
+    <a href="mailto:hello@mrmags.org">CONTACT</a>
+  </nav>
+</header>
+
+<main class="start-main">
+  <div class="start-container">
+
+    <span class="kicker">For Teachers</span>
+    <h1>Free. Forever. We mean forever.</h1>
+    <p class="lede">
+      Drop your school email below. I'll send you a one-click verification link. The moment
+      you click it, your forever-free Mr. Mags license is yours. No trial timer. No upgrade
+      pop-ups in three months. No surprise paywall when we ship a paid tier later. If you're
+      a teacher with a school email, you stay free forever.
+    </p>
+
+    <form class="teacher-form" id="form">
+      <label for="email">Your school email</label>
+      <div class="form-row">
+        <input id="email" type="email" name="email" placeholder="you@yourschool.k12.tx.us" required autocomplete="email" />
+        <button type="submit">Send link</button>
+      </div>
+      <p class="hint">Most school domains work automatically — `.edu`, `.k12.{state}.us`, `.ac.uk`, anything with "school" or "district" in it. If yours doesn't, email <a href="mailto:hello@mrmags.org">hello@mrmags.org</a> and I'll verify you manually.</p>
+    </form>
+
+    <div id="result" class="result" hidden></div>
+
+    <hr class="rule" />
+
+    <section class="phrase-block">
+      <h2>What this gets you</h2>
+      <p>
+        Today, Mr. Mags v0.1 is free for everyone. The only thing you get for verifying right now is your
+        place on the list — when paid features ship later (cross-device sync, the pattern marketplace,
+        team libraries), your account is already flagged as <em>teacher_free_forever</em> and they cost you
+        nothing.
+      </p>
+      <p>
+        It's the same brand promise either way. Verifying just locks it in.
+      </p>
+    </section>
+
+    <p class="signoff">
+      Real human reads <a href="mailto:hello@mrmags.org">hello@mrmags.org</a>.
+    </p>
+
+  </div>
+</main>
+
+<style>
+.teacher-form {
+  margin: 36px 0 24px;
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 28px;
+}
+
+.teacher-form label {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.form-row {
+  display: flex;
+  gap: 12px;
+  align-items: stretch;
+  margin-bottom: 12px;
+}
+
+.form-row input {
+  flex: 1;
+  padding: 12px 14px;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  font: inherit;
+  font-size: 16px;
+  color: var(--ink);
+  background: #fafaf7;
+}
+
+.form-row input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+  background: #fff;
+}
+
+.form-row button {
+  padding: 12px 24px;
+  background: var(--ink);
+  color: #fff;
+  border: 0;
+  border-radius: 4px;
+  font: inherit;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.form-row button:hover { background: var(--accent); }
+.form-row button:disabled { opacity: 0.4; cursor: progress; }
+
+.hint {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+.hint a { color: var(--accent); }
+
+.result {
+  margin: 0 0 24px;
+  padding: 16px 20px;
+  border-radius: 4px;
+  font-size: 15px;
+  line-height: 1.5;
+}
+.result.success { background: #f0f4ec; color: #2c5a2c; border: 1px solid #c8d8c0; }
+.result.error   { background: #fcf0ed; color: #823020; border: 1px solid #e6c4b8; }
+
+@media (max-width: 600px) {
+  .form-row { flex-direction: column; }
+}
+</style>
+
+<script>
+const form = document.getElementById('form');
+const emailInput = document.getElementById('email');
+const button = form.querySelector('button');
+const result = document.getElementById('result');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  result.hidden = true;
+  button.disabled = true;
+  button.textContent = 'Sending…';
+  try {
+    const r = await fetch('/api/teachers/request', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ email: emailInput.value }),
+    });
+    const data = await r.json();
+    if (data.ok) {
+      result.className = 'result success';
+      result.textContent = data.message || "Check your email for a verification link.";
+    } else {
+      result.className = 'result error';
+      result.textContent = data.message || data.error || 'Something went wrong.';
+    }
+  } catch (err) {
+    result.className = 'result error';
+    result.textContent = 'Network error. Try again, or email hello@mrmags.org.';
+  } finally {
+    result.hidden = false;
+    button.disabled = false;
+    button.textContent = 'Send link';
+  }
+});
+</script>
+
+</body>
+</html>
