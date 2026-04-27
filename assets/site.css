@@ -197,6 +197,7 @@ a:hover { color: var(--accent); }
     0 0 1px rgba(255, 255, 255, 0.4),
     0 1px 2px rgba(0, 0, 0, 0.25);
   pointer-events: none;
+  -webkit-user-select: none;
   user-select: none;
   white-space: nowrap;
   display: none;  /* shown only when photo is live + viewport is wide enough */
@@ -206,37 +207,46 @@ a:hover { color: var(--accent); }
   .hero[data-photo="true"] .chalk { display: block; }
 
   .chalk-title {
-    /* "Remember:" — top of chalkboard, where the pointer aims.
-       Sits HIGH on the board so the pointer reads as drawing attention to it
-       and the eye reads the lesson title before anything else. */
-    top: clamp(60px, 11vh, 130px);
+    /* "Remember:" — top of chalkboard, where the pointer aims. */
+    top: clamp(50px, 9vh, 110px);
     left: 50%;
     transform: translateX(-50%) rotate(-1.6deg);
     font-size: clamp(56px, 7vw, 96px);
     font-weight: 600;
   }
 
+  /* The pointer crosses the chalkboard diagonally from ~25vh down to ~41vh
+     and from ~50% width down to ~30% width. Anything inside that band gets
+     visually obscured by the pointer + hand. So tagline + promise sit BELOW
+     ~42vh — clear of the pointer's lower exit point — and centered slightly
+     right of viewport center to clear Mr. Mags's elbow at the lower-left. */
+
   .chalk-tagline {
-    /* "I'll remember everything you teach me." — middle-lower section of board,
-       below where the pointer hangs and clear of Mr. Mags's sleeve at the
-       lower-left. Slight rightward bias for the visual reason that the left
-       portion of the board is occluded. */
-    top: clamp(180px, 36vh, 380px);
+    top: clamp(220px, 42vh, 460px);
     left: 53%;
     transform: translateX(-50%) rotate(-0.8deg);
-    font-size: clamp(22px, 2.6vw, 34px);
+    font-size: clamp(18px, 1.9vw, 26px);
     color: rgba(247, 246, 240, 0.82);
   }
 
   .chalk-promise {
-    /* "Free for teachers, forever." — bottom of chalkboard, just above the
-       chalk tray. Smaller, more handwritten, like a footnote-ish promise. */
-    top: clamp(220px, 44vh, 460px);
+    top: clamp(252px, 47vh, 510px);
     left: 53%;
     transform: translateX(-50%) rotate(-0.4deg);
-    font-size: clamp(20px, 2.3vw, 30px);
-    color: rgba(247, 246, 240, 0.75);
+    font-size: clamp(16px, 1.7vw, 24px);
+    color: rgba(247, 246, 240, 0.78);
     font-style: italic;
+  }
+
+  /* Nav already lives at top: clamp(140px, 26vh, 280px). The pointer band
+     ends at ~41vh, nav stack ends around 35vh — clear. Nudge nav slightly
+     up so the right side has cleaner stacking order:
+       - top:  Remember: (centered)
+       - mid:  nav (right column)
+       - lower: tagline (centered, below pointer)
+       - very bottom: promise */
+  .hero[data-photo="true"] .nav {
+    top: clamp(110px, 20vh, 240px);
   }
 }
 
@@ -403,11 +413,71 @@ h2 {
 
 /* ── Responsive ─────────────────────────────────────────────────────── */
 
-@media (max-width: 720px) {
-  .topbar { padding: 22px 24px; flex-direction: column; gap: 18px; align-items: flex-start; }
-  .nav { gap: 22px; flex-wrap: wrap; }
-  .tagline { padding: 0 24px 28px; max-width: none; text-align: left; align-self: flex-start; }
-  .section { padding: 70px 24px; }
+/* ── Mobile / small-tablet ─────────────────────────────────────────────
+   Photo doesn't crop well to portrait (image is 1.84:1 wide). Approach:
+   - Hero stops being full-screen — uses the photo's natural aspect ratio
+     so the whole cartoon shows, not a thin middle slice.
+   - Topbar lifts off the photo and gets its own white band above it,
+     keeping logo + nav legible.
+   - All chalk overlays + the bottom-right tagline hide.
+   - A simple "kicker" line under the photo covers what the chalk text
+     would have said on desktop.
+   - Section paddings tighten. */
+
+@media (max-width: 899px) {
+  .hero,
+  .hero[data-photo="true"] {
+    min-height: 0;
+    display: block;
+    background-size: cover;
+    background-position: center 30%;
+    aspect-ratio: 1.84 / 1;
+    color: var(--ink);  /* topbar lifts off photo */
+  }
+  .hero[data-photo="true"] .chalk { display: none !important; }
+  .hero[data-photo="true"] .tagline { display: none; }
+
+  .topbar {
+    position: relative;
+    background: var(--paper);
+    padding: 18px 22px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .logo { color: var(--ink); text-shadow: none; }
+  .nav a { color: var(--ink); text-shadow: none; }
+  .nav a::before { content: none; }
+  .nav { transform: none; position: static; flex-direction: row; gap: 18px; }
+  .nav a { font-family: "Inter", sans-serif; font-size: 11px; letter-spacing: 0.18em; font-weight: 400; }
+
+  /* Mobile-only intro line under the photo — restores the brand statement
+     that the chalk overlays carry on desktop. */
+  .mobile-intro {
+    display: block;
+    padding: 36px 24px 24px;
+    text-align: center;
+    background: var(--paper);
+  }
+  .mobile-intro h1 {
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(28px, 6.5vw, 38px);
+    line-height: 1.15;
+    letter-spacing: -0.005em;
+    margin: 0 0 14px;
+  }
+  .mobile-intro p {
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
+  .section { padding: 56px 24px; }
   .downloads { grid-template-columns: 1fr; }
-  .foot { padding: 24px; }
+  .foot { padding: 24px; flex-wrap: wrap; }
+}
+
+/* Hide the mobile intro at desktop sizes */
+@media (min-width: 900px) {
+  .mobile-intro { display: none; }
 }
