@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mr. Mags</title>
+<meta name="description" content="Persistent memory for Claude. Free for teachers, forever." />
+
+<meta property="og:title" content="Mr. Mags" />
+<meta property="og:description" content="Persistent memory for Claude. Free for teachers, forever." />
+<meta property="og:url" content="https://mrmags.org" />
+<meta property="og:image" content="https://mrmags.org/images/hero.jpg" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="icon" href="/favicon.ico" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="/assets/site.css" />
+</head>
+
+<body>
+<main class="hero">
+  <header class="topbar">
+    <a class="logo" href="/" aria-label="Mr. Mags home">MR<span class="logo-dot">.</span>MAGS</a>
+    <nav class="nav" aria-label="Primary">
+      <a href="#about">ABOUT</a>
+      <a href="#teachers">TEACHERS</a>
+      <a href="#download">DOWNLOAD</a>
+      <a href="mailto:hello@mrmags.org">CONTACT</a>
+    </nav>
+  </header>
+
+  <span class="tagline">Persistent memory for Claude. Free for teachers, forever.</span>
+</main>
+
+<section id="about" class="section">
+  <div class="container">
+    <span class="kicker">About</span>
+    <h2>Named for the teacher who needed it.</h2>
+    <p>
+      Mr. Mags is named for <em>Mr. Jeffrey Magnano</em> — a high school teacher whose students call him Mr. Mags.
+      He was the first user. We built it for him because his lesson plans, rubrics, and parent emails
+      kept evaporating into one-shot AI chats that forgot him the moment he opened a new conversation.
+    </p>
+    <p>
+      Now Claude remembers him. Every conversation carries the context of every previous one — what he teaches,
+      who his students are, the rubric he prefers, the cadence of his year.
+    </p>
+    <p class="aside">
+      Everything you tell Mr. Mags lives on your machine. Nothing leaves it. There is no account, no cloud, no
+      server-side database with your name on it. The promise isn't "we won't read your data" — it's that we
+      can't, because we don't have it.
+    </p>
+  </div>
+</section>
+
+<section id="teachers" class="section section-alt">
+  <div class="container">
+    <span class="kicker">For Teachers</span>
+    <h2>Free. Forever. We mean forever.</h2>
+    <p>
+      No "free trial." No "free up to 10 students." No fine print. If you're a teacher with a school email,
+      every feature we ever build — including features we charge other people for — is free for you.
+    </p>
+    <p>
+      Teachers are our best users. They put it through its paces. They make our templates better. So we don't
+      charge them. They&rsquo;re effectively contributing to product development, and they&rsquo;ve already
+      paid in time.
+    </p>
+    <p class="aside small">
+      Verification is one click — confirm a school email, and the free flag lives on your install forever.
+    </p>
+  </div>
+</section>
+
+<section id="download" class="section">
+  <div class="container">
+    <span class="kicker">Download</span>
+    <h2>Mac first. Windows soon. Browser anywhere.</h2>
+    <div class="downloads">
+      <article class="dl-card">
+        <h3>Mac</h3>
+        <p>The desktop app. Lives in your menu bar. Pairs with Claude Desktop.</p>
+        <a class="dl-link disabled" aria-disabled="true">Coming soon</a>
+      </article>
+      <article class="dl-card">
+        <h3>Windows</h3>
+        <p>Same app, same memory, Windows-native installer.</p>
+        <a class="dl-link disabled" aria-disabled="true">Coming soon</a>
+      </article>
+      <article class="dl-card">
+        <h3>Browser</h3>
+        <p>Use Mr. Mags inside claude.ai, ChatGPT, or Gemini in your browser.</p>
+        <a class="dl-link disabled" aria-disabled="true">Coming soon</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="container foot-row">
+    <span>© <span id="yr"></span> MEDiAGATO Network</span>
+    <span class="dot-sep">·</span>
+    <a href="mailto:hello@mrmags.org">hello@mrmags.org</a>
+    <span class="dot-sep">·</span>
+    <a href="/privacy">Privacy</a>
+  </div>
+</footer>
+
+<script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+</body>
+</html>

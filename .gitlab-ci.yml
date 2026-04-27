@@ -1,0 +1,39 @@
+# Mr. Mags landing site — auto-deploys to Cloudflare Pages on every push to main.
+#
+# Zero bandwidth on our infra: Cloudflare Pages serves the static files from
+# their global edge. We just push the HTML/CSS/images.
+#
+# Required CI variables (Settings > CI/CD > Variables — already set from
+# modelreins-docs deploy):
+#   CLOUDFLARE_API_KEY       - global API key
+#   CLOUDFLARE_EMAIL         - steve@mediagato.com
+#   CLOUDFLARE_ACCOUNT_ID    - 29b494eaa794ba39e186184f5b1065bc
+#   CLOUDFLARE_ZONE_ID       - whatever the mrmags.org zone id is (set this once when domain is added)
+
+stages:
+  - deploy
+
+deploy-pages:
+  stage: deploy
+  image: node:22-slim
+  tags: [docker]
+  rules:
+    - if: '$CI_COMMIT_REF_NAME == "main"'
+  before_script:
+    - apt-get update -qq && apt-get install -qq -y curl >/dev/null
+  script:
+    - npx wrangler@latest pages deploy . --project-name=mrmags --branch=main --commit-dirty=true
+    - |
+      if [ -n "$CLOUDFLARE_ZONE_ID" ]; then
+        curl -sS -X POST "https://api.cloudflare.com/client/v4/zones/${CLOUDFLARE_ZONE_ID}/purge_cache" \
+          -H "X-Auth-Email: ${CLOUDFLARE_EMAIL}" \
+          -H "X-Auth-Key: ${CLOUDFLARE_API_KEY}" \
+          -H "Content-Type: application/json" \
+          --data '{"purge_everything":true}' \
+          | grep -q '"success":true' && echo "cache purged" || echo "WARN purge failed"
+      else
+        echo "CLOUDFLARE_ZONE_ID not set — skipping purge (set once after mrmags.org is added to CF)"
+      fi
+  environment:
+    name: production
+    url: https://mrmags.org
