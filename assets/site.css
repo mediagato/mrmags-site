@@ -63,16 +63,11 @@ a:hover { color: var(--accent); }
 
 .logo {
   font-family: "Inter", sans-serif;
-  font-weight: 300;
-  font-size: 18px;
-  letter-spacing: 0.32em;
+  font-weight: 400;
+  font-size: 22px;
+  letter-spacing: 0;
   color: #fff;
   white-space: nowrap;
-}
-
-.logo-dot {
-  color: var(--accent);
-  font-weight: 500;
 }
 
 .nav {
