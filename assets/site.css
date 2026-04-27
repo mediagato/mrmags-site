@@ -111,13 +111,58 @@ a:hover { color: var(--accent); }
    wide where the cartoon image isn't framing the layout the same way. */
 
 @media (min-width: 900px) {
-  /* Brand + chalk taglines live in the photo itself now — drop the desktop
-     word-mark in the topbar and let the nav sit normally in the top-right. */
+  /* Brand lives in the photo itself — drop the desktop word-mark in the topbar. */
   .hero[data-photo="true"] .logo { display: none; }
 
   .hero[data-photo="true"] .topbar {
+    align-items: flex-start;
+    padding-top: 36px;
     justify-content: flex-end;
-    padding-top: 32px;
+  }
+
+  .hero[data-photo="true"] .nav {
+    /* Lift the nav off the topbar and onto the chalkboard. The chalkboard
+       lives roughly between 31% and 71% of the (1.84:1) image; we anchor
+       to the right side of the board where there's empty chalk space. */
+    position: absolute;
+    top: clamp(140px, 26vh, 280px);
+    right: clamp(100px, 22vw, 360px);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    transform: rotate(-1.4deg);
+  }
+
+  .hero[data-photo="true"] .nav a {
+    /* Chalk styling — Caveat is the chalkboard hand */
+    font-family: "Caveat", "Inkfree", "Comic Sans MS", cursive;
+    font-weight: 500;
+    font-size: clamp(20px, 2.1vw, 28px);
+    letter-spacing: 0.01em;
+    text-transform: none;
+    color: rgba(247, 246, 240, 0.92);
+    /* Soft chalk-dust glow rather than a hard outline */
+    text-shadow:
+      0 0 1px rgba(255, 255, 255, 0.4),
+      0 1px 2px rgba(0, 0, 0, 0.25);
+    padding: 2px 4px;
+  }
+
+  .hero[data-photo="true"] .nav a::before {
+    content: "— ";
+    opacity: 0.6;
+  }
+
+  .hero[data-photo="true"] .nav a:hover {
+    color: #fff;
+    text-shadow:
+      0 0 6px rgba(255, 255, 255, 0.5),
+      0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Disable the underline-on-hover behavior — looks weird on chalk */
+  .hero[data-photo="true"] .nav a:hover::after {
+    display: none;
   }
 }
 
