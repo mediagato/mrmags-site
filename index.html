@@ -16,7 +16,7 @@
 <link rel="icon" href="/favicon.ico" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="stylesheet" href="/assets/site.css?v=3" />
+<link rel="stylesheet" href="/assets/site.css?v=4" />
 </head>
 
 <body>
@@ -31,10 +31,14 @@
     </nav>
   </header>
 
-  <!-- Chalk text overlays — desktop only. Hidden on mobile via CSS. -->
+  <!-- Chalk overlay — desktop only. Just "Remember:" on the chalkboard;
+       the pointer aims at it. The tagline + promise live elsewhere now
+       (off-board for the promise, About section for the tagline) so the
+       chalkboard reads cleanly without the pointer cutting through text. -->
   <span class="chalk chalk-title" aria-hidden="true">Remember:</span>
-  <span class="chalk chalk-tagline" aria-hidden="true">I&rsquo;ll remember everything you teach me.</span>
-  <span class="chalk chalk-promise" aria-hidden="true">Free for teachers, forever.</span>
+
+  <!-- Off-board page tagline at bottom-right of hero, as it always was -->
+  <span class="tagline">Free for teachers, forever.</span>
 </main>
 
 <!-- Mobile-only headline under the photo — covers what the chalk overlays
@@ -47,6 +51,7 @@
 <section id="about" class="section">
   <div class="container">
     <span class="kicker">About</span>
+    <p class="about-lead">&ldquo;I&rsquo;ll remember everything you teach me.&rdquo;</p>
     <h2>Named for the teacher who needed it.</h2>
     <p>
       Mr. Mags is named for a school teacher whose students call him Mr. Mags.

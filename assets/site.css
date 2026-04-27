@@ -177,7 +177,15 @@ a:hover { color: var(--accent); }
   line-height: 1.5;
 }
 
-.hero[data-photo="true"] .tagline { display: none; }
+/* On photo hero the tagline lives in the bottom-right of the viewport,
+   in classroom negative space (not on the chalkboard) — never fights the
+   pointer. White-ish chalky color so it reads against the cartoon. */
+.hero[data-photo="true"] .tagline {
+  color: rgba(247, 246, 240, 0.92);
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.45),
+    0 0 14px rgba(0, 0, 0, 0.25);
+}
 
 /* ── Chalk overlays — desktop only, positioned over the chalkboard ──────
    The hero image is 1212x660 (1.84:1). The chalkboard interior occupies
@@ -207,46 +215,28 @@ a:hover { color: var(--accent); }
   .hero[data-photo="true"] .chalk { display: block; }
 
   .chalk-title {
-    /* "Remember:" — top of chalkboard, where the pointer aims. */
-    top: clamp(50px, 9vh, 110px);
-    left: 50%;
+    /* "Remember:" — upper area of chalkboard, where the pointer aims.
+       Position chosen to match the previous baked-in version that
+       Steve already approved (image source y=135 of 660 = ~20vh on a
+       height-filled image). */
+    top: clamp(110px, 18vh, 220px);
+    left: 53%;
     transform: translateX(-50%) rotate(-1.6deg);
     font-size: clamp(56px, 7vw, 96px);
     font-weight: 600;
   }
 
-  /* The pointer crosses the chalkboard diagonally from ~25vh down to ~41vh
-     and from ~50% width down to ~30% width. Anything inside that band gets
-     visually obscured by the pointer + hand. So tagline + promise sit BELOW
-     ~42vh — clear of the pointer's lower exit point — and centered slightly
-     right of viewport center to clear Mr. Mags's elbow at the lower-left. */
+  /* Old chalk-tagline + chalk-promise positions retired — the pointer's
+     diagonal cut through them no matter where they sat. Tagline now lives
+     as the About-section lead headline (below the hero, sharp serif, lots
+     of room). Promise lives as the off-board .tagline at bottom-right of
+     the hero (where it always sat happily before this round). */
+  .chalk-tagline,
+  .chalk-promise { display: none !important; }
 
-  .chalk-tagline {
-    top: clamp(220px, 42vh, 460px);
-    left: 53%;
-    transform: translateX(-50%) rotate(-0.8deg);
-    font-size: clamp(18px, 1.9vw, 26px);
-    color: rgba(247, 246, 240, 0.82);
-  }
-
-  .chalk-promise {
-    top: clamp(252px, 47vh, 510px);
-    left: 53%;
-    transform: translateX(-50%) rotate(-0.4deg);
-    font-size: clamp(16px, 1.7vw, 24px);
-    color: rgba(247, 246, 240, 0.78);
-    font-style: italic;
-  }
-
-  /* Nav already lives at top: clamp(140px, 26vh, 280px). The pointer band
-     ends at ~41vh, nav stack ends around 35vh — clear. Nudge nav slightly
-     up so the right side has cleaner stacking order:
-       - top:  Remember: (centered)
-       - mid:  nav (right column)
-       - lower: tagline (centered, below pointer)
-       - very bottom: promise */
+  /* Nav stays in the right column, clear of the pointer */
   .hero[data-photo="true"] .nav {
-    top: clamp(110px, 20vh, 240px);
+    top: clamp(140px, 26vh, 280px);
   }
 }
 
@@ -274,6 +264,21 @@ a:hover { color: var(--accent); }
   color: var(--accent);
   margin-bottom: 22px;
   text-transform: uppercase;
+}
+
+/* About section lead — Mr. Mags's promise as a big editorial pull-quote.
+   Carries what the chalk-tagline used to say, but with proper breathing
+   room and crisp serif rendering. */
+.about-lead {
+  font-family: "Cormorant Garamond", Georgia, serif !important;
+  font-style: italic !important;
+  font-weight: 400 !important;
+  font-size: clamp(28px, 4.6vw, 56px) !important;
+  line-height: 1.18 !important;
+  color: var(--ink) !important;
+  letter-spacing: -0.005em !important;
+  margin: 0 0 36px !important;
+  max-width: 880px !important;
 }
 
 h2 {
