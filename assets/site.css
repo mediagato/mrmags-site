@@ -163,6 +163,7 @@ a:hover { color: var(--accent); }
 }
 
 .tagline {
+  /* Legacy — replaced by chalk overlays. Kept for non-photo gradient hero. */
   align-self: flex-end;
   padding: 0 56px 40px;
   font-family: "Cormorant Garamond", "Georgia", serif;
@@ -174,6 +175,69 @@ a:hover { color: var(--accent); }
   max-width: 480px;
   text-align: right;
   line-height: 1.5;
+}
+
+.hero[data-photo="true"] .tagline { display: none; }
+
+/* ── Chalk overlays — desktop only, positioned over the chalkboard ──────
+   The hero image is 1212x660 (1.84:1). The chalkboard interior occupies
+   roughly 31–71% of the image width and 5–50% of the height. With
+   background-size: cover and a typical 16:9 viewport, the image fills
+   height and barely crops sides — so the chalkboard's horizontal range
+   in viewport coords is ~30–72% of viewport width, and its vertical
+   range is ~5–50vh. Overlays anchor to those ranges via clamps. */
+
+.chalk {
+  position: absolute;
+  font-family: "Caveat", "Inkfree", "Comic Sans MS", cursive;
+  color: rgba(247, 246, 240, 0.92);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  text-shadow:
+    0 0 1px rgba(255, 255, 255, 0.4),
+    0 1px 2px rgba(0, 0, 0, 0.25);
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  display: none;  /* shown only when photo is live + viewport is wide enough */
+}
+
+@media (min-width: 900px) {
+  .hero[data-photo="true"] .chalk { display: block; }
+
+  .chalk-title {
+    /* "Remember:" — top of chalkboard, where the pointer aims.
+       Sits HIGH on the board so the pointer reads as drawing attention to it
+       and the eye reads the lesson title before anything else. */
+    top: clamp(60px, 11vh, 130px);
+    left: 50%;
+    transform: translateX(-50%) rotate(-1.6deg);
+    font-size: clamp(56px, 7vw, 96px);
+    font-weight: 600;
+  }
+
+  .chalk-tagline {
+    /* "I'll remember everything you teach me." — middle-lower section of board,
+       below where the pointer hangs and clear of Mr. Mags's sleeve at the
+       lower-left. Slight rightward bias for the visual reason that the left
+       portion of the board is occluded. */
+    top: clamp(180px, 36vh, 380px);
+    left: 53%;
+    transform: translateX(-50%) rotate(-0.8deg);
+    font-size: clamp(22px, 2.6vw, 34px);
+    color: rgba(247, 246, 240, 0.82);
+  }
+
+  .chalk-promise {
+    /* "Free for teachers, forever." — bottom of chalkboard, just above the
+       chalk tray. Smaller, more handwritten, like a footnote-ish promise. */
+    top: clamp(220px, 44vh, 460px);
+    left: 53%;
+    transform: translateX(-50%) rotate(-0.4deg);
+    font-size: clamp(20px, 2.3vw, 30px);
+    color: rgba(247, 246, 240, 0.75);
+    font-style: italic;
+  }
 }
 
 /* ── Sections ────────────────────────────────────────────────────────── */
