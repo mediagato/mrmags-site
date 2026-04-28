@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mr. Mags — Privacy</title>
+<meta name="description" content="What we collect (almost nothing), what we don't (your conversations), and why." />
+<link rel="icon" href="/favicon.ico" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="/assets/site.css?v=10" />
+<link rel="stylesheet" href="/assets/start.css" />
+</head>
+<body class="start-body">
+
+<header class="start-topbar">
+  <a class="logo logo-dark" href="/" aria-label="Mr. Mags home">Mr. Mags</a>
+  <nav class="nav nav-dark" aria-label="Primary">
+    <a href="/">HOME</a>
+    <a href="/install">INSTALL</a>
+    <a href="/start">CHEAT SHEET</a>
+    <a href="mailto:hello@mrmags.org">CONTACT</a>
+  </nav>
+</header>
+
+<main class="start-main">
+  <div class="start-container">
+
+    <span class="kicker">Privacy</span>
+    <h1>What we know about you.</h1>
+    <p class="lede">
+      Plain-language version: almost nothing. The desktop app keeps your data on your machine. The
+      website does what every website does — sees who visits — and that's it. No third-party trackers,
+      no Google Analytics, no Meta pixel, no ad networks, no &ldquo;cookies for personalization.&rdquo;
+    </p>
+
+    <hr class="rule" />
+
+    <section class="phrase-block">
+      <h2>The desktop app</h2>
+      <p>
+        Mr. Mags runs on your Mac or Windows machine. The brain — every memory you save, every pattern,
+        every state value — is a database file in your user data folder.
+      </p>
+      <ul class="plain-list">
+        <li>Mac: <code>~/Library/Application Support/Mr. Mags/brain/</code></li>
+        <li>Windows: <code>%APPDATA%\Mr. Mags\brain\</code></li>
+      </ul>
+      <p>
+        That folder never gets uploaded anywhere. There is no &ldquo;cloud sync&rdquo; today. There is no
+        background telemetry that reports the contents of your memories. The MCP relay between Claude
+        Desktop and Mr. Mags is a localhost-only HTTP API on <code>127.0.0.1:11436</code> — your computer
+        talking to itself.
+      </p>
+      <p class="aside-line">
+        We&rsquo;re building this so that the moment we ship cross-device sync as a paid feature, it
+        stays opt-in and end-to-end encrypted. Your conversations are between you and the AI you chose;
+        we are not in the middle.
+      </p>
+    </section>
+
+    <section class="phrase-block">
+      <h2>This website</h2>
+      <p>
+        The site is hosted on Cloudflare Pages. Every page request hits Cloudflare's servers, which keep
+        standard access logs (timestamp, IP address, user-agent, URL) for a short window — that's how the
+        internet works, not specific to us.
+      </p>
+      <p>
+        On top of that, we run a <strong>download counter</strong>: when you click a Download button, our
+        server logs the filename, a salted SHA-256 hash of your IP (so we can roughly count unique
+        downloads without ever holding the IP itself), an 80-character snippet of your browser's
+        user-agent, and Cloudflare's two-letter country code. Then it 302-redirects you to the actual
+        binary on our CDN. Numbers come back at <a href="/api/stats">/api/stats</a> — total, last-7-days,
+        breakdown by file. Public, in case you're curious.
+      </p>
+      <p>
+        That's it. No Google Analytics. No Meta pixel. No Hotjar. No newsletter signup popup. No
+        retargeting cookies. No ad networks.
+      </p>
+    </section>
+
+    <section class="phrase-block">
+      <h2>The teacher verifier</h2>
+      <p>
+        If you submit your school email at <a href="/teachers">/teachers</a>, we store:
+      </p>
+      <ul class="plain-list">
+        <li>Your email address</li>
+        <li>A pending verification token (24-hour TTL, one-time use)</li>
+        <li>Once you click the link: a permanent license code we generated for your account</li>
+      </ul>
+      <p>
+        That's stored in a Cloudflare D1 database (SQLite-compatible, in our account). The verification
+        email itself goes through Resend — one transactional email provider we use, who sees the
+        send-event but doesn't keep the message contents long-term per their policy.
+      </p>
+      <p>
+        We don't sell, share, license, or otherwise hand off your email. We don't add it to a newsletter.
+        If you want it deleted, email <a href="mailto:hello@mrmags.org">hello@mrmags.org</a> and we
+        delete the row. Real human, real keyboard.
+      </p>
+    </section>
+
+    <section class="phrase-block">
+      <h2>What we'd like to add later (and how)</h2>
+      <p>
+        We&rsquo;re considering an <strong>anonymous heartbeat</strong> from the desktop app — once
+        a week it would ping the server with an install UUID, the version number, and the OS family
+        (mac/win), so we know roughly how many people are using it. Zero PII, zero memory content, zero
+        anything you typed. When that ships, it will be:
+      </p>
+      <ul class="plain-list">
+        <li>Disclosed plainly here, with the exact data shape</li>
+        <li>Toggled off in Settings with one click</li>
+        <li>Visible to you — clicking the toggle once shows the literal request body that would be sent</li>
+      </ul>
+      <p>
+        Until that ships, the desktop app is silent. It does not call home.
+      </p>
+    </section>
+
+    <section class="phrase-block">
+      <h2>Where the source lives</h2>
+      <p>
+        Mr. Mags is open source. The Electron app, the brain engine, the browser extension scaffold,
+        and this very website are all on GitHub:
+      </p>
+      <ul class="plain-list">
+        <li><a href="https://github.com/mediagato/mrmags-app">github.com/mediagato/mrmags-app</a></li>
+        <li><a href="https://github.com/mediagato/mediagato-brain">github.com/mediagato/mediagato-brain</a></li>
+        <li><a href="https://github.com/mediagato/mrmags-extension">github.com/mediagato/mrmags-extension</a></li>
+        <li><a href="https://github.com/mediagato/mrmags-site">github.com/mediagato/mrmags-site</a></li>
+      </ul>
+      <p>
+        Anyone can audit the code. The privacy claims here are checkable, not just verbal.
+      </p>
+    </section>
+
+    <hr class="rule" />
+
+    <section class="phrase-block">
+      <h2>Contact</h2>
+      <p>
+        Questions, requests, complaints, audits — <a href="mailto:hello@mrmags.org">hello@mrmags.org</a>.
+        Reply within a couple days. One human reads everything.
+      </p>
+    </section>
+
+    <p class="signoff">
+      Last updated when we last meant it. Page is in git history if you want the diff.
+    </p>
+
+  </div>
+</main>
+
+<style>
+.plain-list {
+  list-style: none;
+  margin: 0 0 18px;
+  padding-left: 0;
+}
+.plain-list li {
+  font-size: 15px;
+  color: var(--ink-soft);
+  margin: 0 0 8px;
+  padding-left: 20px;
+  position: relative;
+}
+.plain-list li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+.plain-list code {
+  font-family: "SF Mono", Menlo, Consolas, monospace;
+  font-size: 12px;
+  background: rgba(140, 58, 44, 0.08);
+  padding: 2px 6px;
+  border-radius: 3px;
+  color: var(--ink);
+}
+.plain-list a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-style: dotted;
+}
+.plain-list a:hover {
+  text-decoration-style: solid;
+}
+.phrase-block code {
+  font-family: "SF Mono", Menlo, Consolas, monospace;
+  font-size: 12px;
+  background: rgba(140, 58, 44, 0.08);
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+.phrase-block a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-style: dotted;
+}
+.phrase-block a:hover { text-decoration-style: solid; }
+</style>
+
+</body>
+</html>
