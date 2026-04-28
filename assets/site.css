@@ -416,6 +416,17 @@ h2 {
   border-bottom-color: var(--accent);
 }
 
+.dl-counter {
+  margin: 36px 0 0 !important;
+  text-align: center;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-style: italic;
+  font-size: 18px !important;
+  color: var(--ink-soft) !important;
+  letter-spacing: 0.01em;
+  min-height: 1.5em;
+}
+
 /* ── Footer ─────────────────────────────────────────────────────────── */
 
 .foot {

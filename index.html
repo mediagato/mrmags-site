@@ -16,7 +16,7 @@
 <link rel="icon" href="/favicon.ico" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="stylesheet" href="/assets/site.css?v=9" />
+<link rel="stylesheet" href="/assets/site.css?v=10" />
 </head>
 
 <body>
@@ -115,13 +115,13 @@
       <article class="dl-card">
         <h3>Mac</h3>
         <p>The desktop app. Lives in your menu bar. Pairs with Claude Desktop. Universal binary — Apple Silicon and Intel.</p>
-        <a class="dl-link" href="https://cdn.mrmags.org/Mr-Mags.dmg">Download for Mac</a>
+        <a class="dl-link" href="/api/d/Mr-Mags.dmg">Download for Mac</a>
         <p class="dl-hint"><a href="/install#mac-on-a-mac">3-minute install guide →</a></p>
       </article>
       <article class="dl-card">
         <h3>Windows</h3>
         <p>Same app, same memory, Windows-native installer.</p>
-        <a class="dl-link" href="https://cdn.mrmags.org/Mr-Mags-Setup.exe">Download for Windows</a>
+        <a class="dl-link" href="/api/d/Mr-Mags-Setup.exe">Download for Windows</a>
         <p class="dl-hint"><a href="/install#on-windows">3-minute install guide →</a></p>
       </article>
       <article class="dl-card">
@@ -130,6 +130,7 @@
         <a class="dl-link disabled" aria-disabled="true">Coming soon</a>
       </article>
     </div>
+    <p class="dl-counter" id="dl-counter" aria-live="polite"></p>
   </div>
 </section>
 
@@ -168,6 +169,21 @@
   </div>
 </footer>
 
-<script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+fetch('/api/stats')
+  .then(r => r.ok ? r.json() : null)
+  .then(d => {
+    if (!d || !d.total) return;
+    const el = document.getElementById('dl-counter');
+    if (!el) return;
+    const n = d.total.toLocaleString();
+    const week = d.last_7_days || 0;
+    el.textContent = week > 0
+      ? n + " downloads, " + week + " this week."
+      : n + (d.total === 1 ? " download" : " downloads") + " so far.";
+  })
+  .catch(() => { /* silent — counter is decoration, not load-bearing */ });
+</script>
 </body>
 </html>
