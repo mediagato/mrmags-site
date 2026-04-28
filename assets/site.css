@@ -400,6 +400,22 @@ h2 {
   cursor: default;
 }
 
+.dl-hint {
+  margin: 14px 0 0 !important;
+  font-size: 12px !important;
+  color: var(--ink-soft);
+}
+
+.dl-hint a {
+  color: var(--accent);
+  border-bottom: 1px solid transparent;
+  transition: border-color .15s;
+}
+
+.dl-hint a:hover {
+  border-bottom-color: var(--accent);
+}
+
 /* ── Footer ─────────────────────────────────────────────────────────── */
 
 .foot {

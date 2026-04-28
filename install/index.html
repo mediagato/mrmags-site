@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mr. Mags — Install</title>
+<meta name="description" content="Step-by-step install for Mac and Windows. Free for everyone in early access." />
+<link rel="icon" href="/favicon.ico" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="/assets/site.css?v=9" />
+<link rel="stylesheet" href="/assets/start.css" />
+</head>
+<body class="start-body">
+
+<header class="start-topbar">
+  <a class="logo logo-dark" href="/" aria-label="Mr. Mags home">Mr. Mags</a>
+  <nav class="nav nav-dark" aria-label="Primary">
+    <a href="/">HOME</a>
+    <a href="/#about">ABOUT</a>
+    <a href="/start">CHEAT SHEET</a>
+    <a href="mailto:hello@mrmags.org">CONTACT</a>
+  </nav>
+</header>
+
+<main class="start-main">
+  <div class="start-container">
+
+    <span class="kicker">Install</span>
+    <h1>Three minutes from download to done.</h1>
+    <p class="lede">
+      Mr. Mags is unsigned in early access — your Mac or Windows will warn you on first launch.
+      That's normal. Here's exactly what you'll see and what to click. After that the app sits in your
+      menu bar / system tray, gives Claude a memory, and forgets you exist until you click it.
+    </p>
+
+    <hr class="rule" />
+
+    <!-- ── MAC ──────────────────────────────────────────────── -->
+
+    <section class="phrase-block">
+      <h2><span class="num">M</span> On a Mac</h2>
+
+      <ol class="install-steps">
+        <li>
+          <strong>Download the installer.</strong>
+          <p>
+            <a class="cta-link" href="https://cdn.mrmags.org/Mr-Mags.dmg">Download Mr-Mags.dmg →</a>
+          </p>
+          <p class="hint">Universal binary. Works on Apple Silicon (M1/M2/M3/M4) and Intel.</p>
+        </li>
+
+        <li>
+          <strong>Open the DMG.</strong> Double-click the file in your Downloads folder. A small window
+          opens with the Mr. Mags icon and a shortcut to your <em>Applications</em> folder.
+        </li>
+
+        <li>
+          <strong>Drag Mr. Mags into Applications.</strong> Just like installing any other Mac app.
+        </li>
+
+        <li>
+          <strong>The first launch — this is the part to read.</strong>
+          <p>
+            Open <em>Applications</em>, find <em>Mr. Mags</em>, and <em>right-click</em> on it (or
+            Control-click). Choose <strong>Open</strong> from the menu.
+          </p>
+          <p>
+            Mac will pop up a dialog: <em>"macOS cannot verify the developer of 'Mr. Mags.' Are you sure
+            you want to open it?"</em> Click <strong>Open</strong>.
+          </p>
+          <p class="hint">
+            <strong>Why this happens:</strong> we haven't enrolled in Apple's $99/yr Developer Program
+            yet — early access. Once we do, this prompt goes away and the app installs like any other.
+            Right-click → Open is the only-time-you-need-to-do-this step. After that, double-click works
+            forever.
+          </p>
+        </li>
+
+        <li>
+          <strong>Mr. Mags introduces himself.</strong>
+          <p>
+            A small window pops up: <em>"Hi, I'm Mr. Mags. I just gave Claude a memory."</em> Click
+            <strong>Got it</strong>. The Mr. Mags window opens with a cheat sheet and a memory browser.
+          </p>
+        </li>
+
+        <li>
+          <strong>Quit and reopen Claude Desktop.</strong>
+          <p>
+            If Claude Desktop was already running when you installed, quit it (⌘Q) and reopen it. Claude
+            picks up the new memory tools on launch. If it wasn't running, just open it now.
+          </p>
+        </li>
+
+        <li>
+          <strong>Try it.</strong>
+          <p>
+            In Claude, type: <em>"Remember that I teach 9th grade biology."</em>
+          </p>
+          <p>
+            Then type: <em>"What grade do I teach?"</em>
+          </p>
+          <p>
+            Claude should answer correctly. That's it. Mr. Mags is working.
+          </p>
+        </li>
+      </ol>
+
+      <p class="aside small">
+        Where the memory file lives: <code>~/Library/Application Support/Mr. Mags/brain/</code>
+        Nothing leaves that folder. No cloud, no account, no telemetry.
+      </p>
+    </section>
+
+    <hr class="rule" />
+
+    <!-- ── WINDOWS ──────────────────────────────────────────── -->
+
+    <section class="phrase-block">
+      <h2><span class="num">W</span> On Windows</h2>
+
+      <ol class="install-steps">
+        <li>
+          <strong>Download the installer.</strong>
+          <p>
+            <a class="cta-link" href="https://cdn.mrmags.org/Mr-Mags-Setup.exe">Download Mr-Mags-Setup.exe →</a>
+          </p>
+        </li>
+
+        <li>
+          <strong>Run the installer.</strong> Double-click <em>Mr-Mags-Setup.exe</em> in your Downloads.
+        </li>
+
+        <li>
+          <strong>The SmartScreen warning — this is the part to read.</strong>
+          <p>
+            Windows will pop up a blue window: <em>"Microsoft Defender SmartScreen prevented an
+            unrecognized app from starting."</em>
+          </p>
+          <p>
+            Click the small <strong>"More info"</strong> link. The window expands. Click the
+            <strong>"Run anyway"</strong> button that appears.
+          </p>
+          <p class="hint">
+            <strong>Why this happens:</strong> we haven't bought a Windows code-signing certificate
+            (~$300/yr) — early access. SmartScreen flags any installer it hasn't seen signed before.
+            "Run anyway" is the right button. The installer is the one you just downloaded from
+            mrmags.org — Windows just doesn't know us yet.
+          </p>
+        </li>
+
+        <li>
+          <strong>Step through the installer.</strong>
+          <p>
+            Pick whether to install for "just me" or "all users" (just me is fine). Accept the default
+            install location. Let it create a desktop shortcut. Click Install. Wait a few seconds.
+            Click Finish.
+          </p>
+        </li>
+
+        <li>
+          <strong>Mr. Mags introduces himself.</strong>
+          <p>
+            A small window pops up explaining what just happened. Click <strong>Got it</strong>. The
+            Mr. Mags window opens with a cheat sheet and a memory browser.
+          </p>
+        </li>
+
+        <li>
+          <strong>Quit and reopen Claude Desktop.</strong>
+          <p>
+            If Claude Desktop was already running, fully exit it (right-click the Claude tray icon →
+            Quit) and reopen it. Claude picks up the new memory tools on launch.
+          </p>
+        </li>
+
+        <li>
+          <strong>Try it.</strong>
+          <p>
+            In Claude, type: <em>"Remember that I teach 9th grade biology."</em>
+          </p>
+          <p>
+            Then type: <em>"What grade do I teach?"</em>
+          </p>
+          <p>
+            Claude should answer correctly. That's it. Mr. Mags is working.
+          </p>
+        </li>
+      </ol>
+
+      <p class="aside small">
+        Where the memory file lives: <code>%APPDATA%\Mr. Mags\brain\</code>
+        Nothing leaves that folder. No cloud, no account, no telemetry.
+      </p>
+    </section>
+
+    <hr class="rule" />
+
+    <section class="phrase-block">
+      <h2>Something went sideways?</h2>
+      <p>
+        Real human reads <a href="mailto:hello@mrmags.org">hello@mrmags.org</a>. Tell me what you saw,
+        what you clicked, and what your machine is (Mac M-something / Intel Mac / Windows 10 / Windows
+        11). I'll write back.
+      </p>
+      <p>
+        If you'd rather, ping Steve directly — you have his number.
+      </p>
+    </section>
+
+    <p class="signoff">
+      Once it's working, the <a href="/start">six-phrase cheat sheet</a> shows the most useful things to
+      say to Claude. Two minutes of reading; everything else is just talking.
+    </p>
+
+  </div>
+</main>
+
+<style>
+.install-steps {
+  list-style: none;
+  counter-reset: step;
+  margin: 28px 0;
+  padding: 0;
+}
+
+.install-steps > li {
+  counter-increment: step;
+  position: relative;
+  padding: 22px 0 22px 64px;
+  border-bottom: 1px dashed var(--rule);
+}
+
+.install-steps > li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 22px;
+  width: 44px;
+  height: 44px;
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 500;
+  font-size: 22px;
+}
+
+.install-steps > li > strong {
+  display: block;
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.install-steps > li > p {
+  margin: 8px 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+.install-steps > li > p em { font-style: italic; }
+
+.install-steps .hint {
+  margin-top: 10px;
+  padding: 12px 16px;
+  background: var(--paper-alt);
+  border-left: 2px solid var(--accent);
+  border-radius: 0 4px 4px 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+.install-steps code {
+  font-family: "SF Mono", Menlo, Consolas, monospace;
+  font-size: 12px;
+  background: rgba(140, 58, 44, 0.08);
+  padding: 2px 6px;
+  border-radius: 3px;
+  color: var(--ink);
+}
+
+.phrase-block h2 .num {
+  display: inline-block;
+  width: 38px;
+  height: 38px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 50%;
+  font-family: "Caveat", cursive;
+  font-weight: 600;
+  font-size: 24px;
+  text-align: center;
+  line-height: 38px;
+  margin-right: 12px;
+  vertical-align: middle;
+}
+
+.cta-link[href$=".dmg"],
+.cta-link[href$=".exe"] {
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  margin-top: 4px;
+}
+</style>
+
+</body>
+</html>
