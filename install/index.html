@@ -62,18 +62,45 @@
         <li>
           <strong>The first launch — this is the part to read.</strong>
           <p>
-            Open <em>Applications</em>, find <em>Mr. Mags</em>, and <em>right-click</em> on it (or
-            Control-click). Choose <strong>Open</strong> from the menu.
+            Mac will block Mr. Mags on first launch because it isn't code-signed yet. There are
+            two ways to get past it. <strong>Try Path A first.</strong> If it doesn't work
+            (macOS Sequoia 15 and later removed the right-click bypass), use Path B.
           </p>
-          <p>
-            Mac will pop up a dialog: <em>"macOS cannot verify the developer of 'Mr. Mags.' Are you sure
-            you want to open it?"</em> Click <strong>Open</strong>.
-          </p>
+
+          <p><strong>Path A — Right-click → Open</strong> (works on macOS 14 Sonoma and earlier)</p>
+          <ul class="sub-steps">
+            <li>Open <em>Applications</em>, find <em>Mr. Mags</em>.</li>
+            <li><em>Right-click</em> on Mr. Mags (or hold Control while clicking). Choose <strong>Open</strong> from the menu.</li>
+            <li>A dialog appears: <em>"macOS cannot verify the developer of 'Mr. Mags.' Are you sure you want to open it?"</em></li>
+            <li>Click <strong>Open</strong>. App launches. Done — you only do this once.</li>
+          </ul>
+
+          <p><strong>Path B — Privacy &amp; Security → Open Anyway</strong> (required on macOS Sequoia 15+)</p>
+          <ul class="sub-steps">
+            <li>Try to open Mr. Mags normally (double-click). It will be blocked. Mac shows: <em>"'Mr. Mags' was not opened because Apple cannot check it for malicious software"</em> or similar. Click <strong>Done</strong> to dismiss.</li>
+            <li>Open <strong>System Settings</strong> (or System Preferences on older Macs).</li>
+            <li>Click <strong>Privacy &amp; Security</strong> in the sidebar.</li>
+            <li>Scroll down to the <strong>Security</strong> section. You'll see a line that says: <em>"'Mr. Mags' was blocked to protect your Mac."</em></li>
+            <li>Click the <strong>Open Anyway</strong> button next to that line.</li>
+            <li>Mac asks for your login password. Enter it.</li>
+            <li>One more dialog appears confirming you want to open the app. Click <strong>Open Anyway</strong>.</li>
+            <li>App launches. Done — you only do this once.</li>
+          </ul>
+
           <p class="hint">
-            <strong>Why this happens:</strong> we haven't enrolled in Apple's $99/yr Developer Program
-            yet — early access. Once we do, this prompt goes away and the app installs like any other.
-            Right-click → Open is the only-time-you-need-to-do-this step. After that, double-click works
-            forever.
+            <strong>Why this happens:</strong> Mr. Mags isn't enrolled in Apple's $99/yr Developer
+            Program yet — early access. Once we sign the binary, this whole bypass goes away and
+            the app opens like any other download. Until then, the steps above are a one-time
+            permission grant. After your first successful launch, double-clicking the app icon
+            works forever.
+          </p>
+
+          <p class="hint">
+            <strong>Still stuck?</strong> Open Terminal and run
+            <code>xattr -d com.apple.quarantine /Applications/Mr.\ Mags.app</code> — that removes
+            the quarantine flag that triggers the block. Then double-click normally. This is the
+            "I know what I'm doing" escape hatch; only run it on apps you actually trust (you
+            downloaded this one from mrmags.org yourself).
           </p>
         </li>
 
@@ -286,6 +313,22 @@
   border-radius: 3px;
   color: var(--ink);
 }
+
+.sub-steps {
+  margin: 8px 0 16px 18px;
+  padding: 0;
+  list-style: disc;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+}
+
+.sub-steps li {
+  margin: 4px 0;
+}
+
+.sub-steps li em { font-style: italic; }
+.sub-steps li strong { font-weight: 600; color: var(--ink); }
 
 .phrase-block h2 .num {
   display: inline-block;
