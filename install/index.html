@@ -29,10 +29,21 @@
     <span class="kicker">Install</span>
     <h1>Three minutes from download to done.</h1>
     <p class="lede">
-      Mr. Mags is unsigned in early access — your Mac or Windows will warn you on first launch.
-      That's normal. Here's exactly what you'll see and what to click. After that the app sits in your
-      menu bar / system tray, gives Claude a memory, and forgets you exist until you click it.
+      Mr. Mags is built by one person. I'm not enrolled in Apple's $99/year Developer Program or
+      Microsoft's code-signing program yet — that comes when the app earns it. Until then, both Mac
+      and Windows will warn you on first launch. That's expected, not a bug. This page tells you
+      exactly what you'll see, why it happens, and the fastest way through it. After that the app
+      sits quietly in your menu bar or system tray, gives Claude a memory, and leaves you alone
+      until you need it.
     </p>
+
+    <div class="solo-note">
+      <strong>A note from the developer:</strong> I know the security warning is annoying.
+      I'm working on getting the app properly signed — it's on the roadmap. In the meantime,
+      every path below is a one-time thing. Once you're past it, Mr. Mags opens normally
+      forever. If anything goes sideways, email me: <a href="mailto:hello@mrmags.org">hello@mrmags.org</a>.
+      I read every message.
+    </div>
 
     <hr class="rule" />
 
@@ -60,55 +71,50 @@
         </li>
 
         <li>
-          <strong>The first launch — this is the part to read.</strong>
+          <strong>The first launch — read this part.</strong>
           <p>
-            Mac will block Mr. Mags on first launch because it isn't code-signed yet. There are
-            two ways to get past it. <strong>Try Path A first.</strong> If it doesn't work
-            (macOS Sequoia 15 and later removed the right-click bypass), use Path B.
+            Mac will block Mr. Mags because the app isn't code-signed yet. This is a one-time
+            hurdle. Pick the path that matches your macOS version — all three end with the app
+            opening normally.
           </p>
-
-          <p><strong>Path A — Right-click → Open</strong> (works on macOS 14 Sonoma and earlier)</p>
-          <ul class="sub-steps">
-            <li>Open <em>Applications</em>, find <em>Mr. Mags</em>.</li>
-            <li><em>Right-click</em> on Mr. Mags (or hold Control while clicking). Choose <strong>Open</strong> from the menu.</li>
-            <li>A dialog appears: <em>"macOS cannot verify the developer of 'Mr. Mags.' Are you sure you want to open it?"</em></li>
-            <li>Click <strong>Open</strong>. App launches. Done — you only do this once.</li>
-          </ul>
-
-          <p><strong>Path B — Privacy &amp; Security → Open Anyway</strong> (required on macOS Sequoia 15+)</p>
-          <ul class="sub-steps">
-            <li>Try to open Mr. Mags normally (double-click). It will be blocked. Mac shows: <em>"'Mr. Mags' was not opened because Apple cannot check it for malicious software"</em> or similar. Click <strong>Done</strong> to dismiss.</li>
-            <li>Open <strong>System Settings</strong> (or System Preferences on older Macs).</li>
-            <li>Click <strong>Privacy &amp; Security</strong> in the sidebar.</li>
-            <li>Scroll down to the <strong>Security</strong> section. You'll see a line that says: <em>"'Mr. Mags' was blocked to protect your Mac."</em></li>
-            <li>Click the <strong>Open Anyway</strong> button next to that line.</li>
-            <li>Mac asks for your login password. Enter it.</li>
-            <li>One more dialog appears confirming you want to open the app. Click <strong>Open Anyway</strong>.</li>
-            <li>App launches. Done — you only do this once.</li>
-          </ul>
 
           <p class="hint">
-            <strong>Why this happens:</strong> Mr. Mags isn't enrolled in Apple's $99/yr Developer
-            Program yet — early access. Once we sign the binary, this whole bypass goes away and
-            the app opens like any other download. Until then, the steps above are a one-time
-            permission grant. After your first successful launch, double-clicking the app icon
-            works forever.
+            <strong>Why this happens:</strong> Apple requires developers to pay $99/year and submit
+            apps for notarization before macOS trusts them silently. Mr. Mags is an independent
+            project — I'm not enrolled yet. The app itself hasn't changed; Mac just doesn't
+            recognize my name. Any of the three paths below is a one-time permission grant.
+            After your first successful launch, double-clicking Mr. Mags works forever.
           </p>
 
-          <p><strong>Path C — Terminal one-liner</strong> (works on any macOS version, fastest option)</p>
+          <p><strong>Path A — Right-click → Open</strong> <span class="path-badge">macOS 14 Sonoma and earlier</span></p>
           <ul class="sub-steps">
-            <li>Open <strong>Terminal</strong> (Spotlight → type "Terminal" → hit Enter).</li>
-            <li>Paste this command and press Enter:</li>
+            <li>In <em>Applications</em>, right-click Mr. Mags (or Control-click). Choose <strong>Open</strong>.</li>
+            <li>A dialog appears asking if you're sure. Click <strong>Open</strong>. Done.</li>
+          </ul>
+
+          <p><strong>Path B — Privacy &amp; Security</strong> <span class="path-badge">macOS 15 Sequoia — may not work reliably</span></p>
+          <ul class="sub-steps">
+            <li>Double-click Mr. Mags. It gets blocked. Click <strong>Done</strong> to dismiss the dialog.</li>
+            <li>Open <strong>System Settings → Privacy &amp; Security</strong>. Scroll to the Security section.</li>
+            <li>Find the line <em>"'Mr. Mags' was blocked to protect your Mac."</em> Click <strong>Open Anyway</strong>.</li>
+            <li>Enter your password. Click <strong>Open Anyway</strong> one more time. Done.</li>
+            <li class="hint-inline">If the "Open Anyway" button never appears, use Path C — Sequoia 15.4+ sometimes skips showing it.</li>
+          </ul>
+
+          <p><strong>Path C — Terminal one-liner</strong> <span class="path-badge">works on every macOS version, most reliable</span></p>
+          <ul class="sub-steps">
+            <li>Open <strong>Terminal</strong>: press <strong>⌘ Space</strong>, type <em>Terminal</em>, hit Enter.</li>
+            <li>Paste the line below and press Enter. It runs silently — no output means it worked.</li>
           </ul>
           <pre class="terminal-cmd">xattr -d com.apple.quarantine "/Applications/Mr. Mags.app"</pre>
           <ul class="sub-steps">
-            <li>It runs silently (no output = success). Then double-click Mr. Mags normally — it opens immediately.</li>
+            <li>Double-click Mr. Mags. It opens immediately, no warning.</li>
           </ul>
           <p class="hint">
-            <strong>Why this works:</strong> macOS stamps a "quarantine" flag on every file downloaded
-            from the internet. That command removes the flag. Nothing else changes — the app is
-            identical to what you downloaded. This is the same step macOS would let you do yourself
-            via Privacy &amp; Security if it cooperated.
+            <strong>What that command does:</strong> macOS tags every internet download with a
+            "quarantine" flag. That one line removes the tag. The app is bit-for-bit identical to
+            what you downloaded — nothing about it changes. This is the same action as "Open
+            Anyway," just done directly instead of through a GUI that Sequoia sometimes hides.
           </p>
         </li>
 
@@ -360,6 +366,46 @@
   font-size: 14px;
   letter-spacing: 0.06em;
   margin-top: 4px;
+}
+
+.solo-note {
+  margin: 24px 0 32px;
+  padding: 16px 20px;
+  background: var(--paper-alt);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 6px 6px 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+.solo-note strong {
+  color: var(--ink);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.path-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: rgba(140, 58, 44, 0.1);
+  color: var(--accent);
+  padding: 2px 8px;
+  border-radius: 3px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.hint-inline {
+  font-size: 13px;
+  color: var(--ink-soft);
+  font-style: italic;
+  list-style: none;
+  margin-top: 6px;
 }
 
 .terminal-cmd {
