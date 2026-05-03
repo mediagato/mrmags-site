@@ -95,12 +95,20 @@
             works forever.
           </p>
 
+          <p><strong>Path C — Terminal one-liner</strong> (works on any macOS version, fastest option)</p>
+          <ul class="sub-steps">
+            <li>Open <strong>Terminal</strong> (Spotlight → type "Terminal" → hit Enter).</li>
+            <li>Paste this command and press Enter:</li>
+          </ul>
+          <pre class="terminal-cmd">xattr -d com.apple.quarantine "/Applications/Mr. Mags.app"</pre>
+          <ul class="sub-steps">
+            <li>It runs silently (no output = success). Then double-click Mr. Mags normally — it opens immediately.</li>
+          </ul>
           <p class="hint">
-            <strong>Still stuck?</strong> Open Terminal and run
-            <code>xattr -d com.apple.quarantine /Applications/Mr.\ Mags.app</code> — that removes
-            the quarantine flag that triggers the block. Then double-click normally. This is the
-            "I know what I'm doing" escape hatch; only run it on apps you actually trust (you
-            downloaded this one from mrmags.org yourself).
+            <strong>Why this works:</strong> macOS stamps a "quarantine" flag on every file downloaded
+            from the internet. That command removes the flag. Nothing else changes — the app is
+            identical to what you downloaded. This is the same step macOS would let you do yourself
+            via Privacy &amp; Security if it cooperated.
           </p>
         </li>
 
@@ -352,6 +360,19 @@
   font-size: 14px;
   letter-spacing: 0.06em;
   margin-top: 4px;
+}
+
+.terminal-cmd {
+  font-family: "SF Mono", Menlo, Consolas, monospace;
+  font-size: 13px;
+  background: #1a1a1a;
+  color: #e8e8e8;
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin: 8px 0 8px 18px;
+  overflow-x: auto;
+  white-space: pre;
+  line-height: 1.5;
 }
 </style>
 
